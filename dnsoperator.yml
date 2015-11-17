@@ -1,0 +1,118 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: IETF.DNSoperator.API
+host: api.registry.tld
+basePath: /dnsop/v1
+schemes:
+  - https
+paths:
+  '/update/{domain}':
+    get:
+      summary: Get domain delegation information
+      operationId: getDelegation
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: OAuth 2.0 Bearer Token
+          required: true
+          type: string
+        - name: domain
+          in: path
+          description: Domain Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/delegation'
+        '401':
+          description: Unauthorised
+        '404':
+          description: Domain not found
+    put:
+      summary: Set domain delegation information
+      operationId: setDelegation
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: OAuth 2.0 Bearer Token
+          required: true
+          type: string
+        - name: domain
+          in: path
+          description: Domain Name
+          required: true
+          type: string
+        - name: delegation
+          in: body
+          description: Delegation data
+          required: true
+          schema:
+            $ref: '#/definitions/delegation'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: string
+        '401':
+          description: Unauthorised
+        '404':
+          description: Domain not found
+definitions:
+  delegation:
+    required:
+      - domain
+      - nameservers
+    properties:
+      domain:
+        type: string
+      nameservers:
+        type: array
+        items:
+          $ref: '#/definitions/nameserver'
+      dnsssec:
+        $ref: '#/definitions/dnssec'
+  nameserver:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+      ipv4glue:
+        type: array
+        items:
+          type: string
+      ipv6glue:
+        type: array
+        items:
+          type: string
+  dnssec:
+    type: object
+    properties:
+      ds:
+        type: array
+        items:
+          $ref: '#/definitions/ds'
+  ds:
+    type: object
+    required:
+      - keytag
+      - algorithm
+      - digesttype
+      - digest
+    properties:
+      keytag:
+        type: integer
+      algorithm:
+        type: integer
+      digesttype:
+        type: integer
+      digest:
+        type: string
