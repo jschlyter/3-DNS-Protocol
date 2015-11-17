@@ -2,6 +2,13 @@ swagger: '2.0'
 info:
   version: v1
   title: IETF.DNSoperator.API
+  contact:
+    name: Jakob Schlyter
+    url: https://www.kirei.se/
+    email: jakob@kirei.se
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 host: api.registry.tld
 basePath: /dnsop/v1
 schemes:
