@@ -40,37 +40,37 @@ paths:
           description: Unauthorised
         '404':
           description: Domain not found
-    put:
-      summary: Set domain delegation information
-      operationId: setDelegation
-      produces:
-        - application/json
-      parameters:
-        - name: Authorization
-          in: header
-          description: OAuth 2.0 Bearer Token
-          required: true
-          type: string
-        - name: domain
-          in: path
-          description: Domain Name
-          required: true
-          type: string
-        - name: delegation
-          in: body
-          description: Delegation data
-          required: true
-          schema:
-            $ref: '#/definitions/delegation'
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            type: string
-        '401':
-          description: Unauthorised
-        '404':
-          description: Domain not found
+#    put:
+#      summary: Set domain delegation information
+#      operationId: setDelegation
+#      produces:
+#        - application/json
+#      parameters:
+#        - name: Authorization
+#          in: header
+#          description: OAuth 2.0 Bearer Token
+#          required: true
+#          type: string
+#        - name: domain
+#          in: path
+#          description: Domain Name
+#          required: true
+#          type: string
+#        - name: delegation
+#          in: body
+#          description: Delegation data
+#          required: true
+#          schema:
+#            $ref: '#/definitions/delegation'
+#      responses:
+#        '200':
+#          description: Successful operation
+#          schema:
+#            type: string
+#        '401':
+#          description: Unauthorised
+#        '404':
+#          description: Domain not found
   '/domain/{domain}/delegation/dnssec':
     get:
       summary: Get DNSSEC information
