@@ -14,7 +14,7 @@ basePath: /dnsop/v1
 schemes:
   - https
 paths:
-  '/update/{domain}':
+  '/{domain}':
     get:
       summary: Get domain delegation information
       operationId: getDelegation
